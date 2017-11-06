@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:700');
+
+body {
+    background-color: #555;
+    font-family: 'Quicksand', Arial, Helvetica, sans-serif;
+}
+
+aside {
+    position: absolute;
+}
+
+h1 {
+    margin: 2rem;
+    padding: 0;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.board {
+    margin: 0 auto;
+    width: 520px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.square {
+    margin: 11px;
+    padding: 0;
+    border-radius: .7rem;
+    background-color: #888;
+    width: 150px;
+    height: 150px;
+    font-size: 7.5rem;
+    text-align: center;
+    text-shadow: #333 .1rem .1rem;
+}
+
+.X-marker {color: rgb(123, 53, 192);}
+.O-marker {color: greenyellow;}

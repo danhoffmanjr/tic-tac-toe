@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <h1>TIC-TAC-TOE</h1>
+    <aside id="setup">
+        <section>
+            <label>Player 1: </label>
+            <input type="text" id="input-player1-name" placeholder="Enter Player 1 Name">
+            <select id="player-mark">
+                <option value="select" default>Select X's or O's</option>
+                <option value="O">O's</option>
+                <option value="X">X's</option>
+            </select>
+        </section>
+        <section>
+            <label>Player 2: </label>
+            <input type="text" id="input-player2-name" placeholder="Enter Player 2 Name">
+        </section>
+        <button id="btn-start">START GAME</button>
+        <figure id="player-1-active">Player One, It's Your Turn!</figure>
+        <figure id="player-2-active">Player Two, It's Your Turn!</figure>
+        <button id="btn-end">END GAME</button>
+    </aside>
+    <main class="board" id="game-board">
+        <div id="sq1" class="square"></div>
+        <div id="sq2" class="square"></div>
+        <div id="sq3" class="square"></div>
+        <div id="sq4" class="square"></div>
+        <div id="sq5" class="square"></div>
+        <div id="sq6" class="square"></div>
+        <div id="sq7" class="square"></div>
+        <div id="sq8" class="square"></div>
+        <div id="sq9" class="square"></div>
+    </main>
+<script src="script.js"></script>    
+</body>
+</html>
