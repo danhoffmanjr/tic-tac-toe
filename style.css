@@ -5,21 +5,88 @@ body {
     font-family: 'Quicksand', Arial, Helvetica, sans-serif;
 }
 
-aside {
-    position: absolute;
-}
-
 h1 {
-    margin: 2rem;
+    margin: 2rem 0 1rem 0;
     padding: 0;
     text-align: center;
     font-size: 3rem;
 }
 
+aside {
+    display: block;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.setup section {
+    padding: 0 1rem;
+    border-right: 2px solid orange;
+}
+
+.setup section:last-child {
+    border-right: none;
+}
+
+.setup {
+    display: flex;
+}
+
+.setup section {
+    flex: 1;
+}
+
+.setup label {
+    display: inline-block;
+    margin: .4rem 0;
+    font-size: 2rem;
+    color: orange;
+}
+
+.setup input, .setup select {
+    background-color: bisque;
+    border: 1px solid #fff;
+    padding: 5px;
+    margin: 0 0 .7rem 0;
+}
+
+.setup button {
+    display: block;
+    margin: 3rem auto;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.setup button:hover {
+    background-color: rgb(58, 192, 4);
+}
+
+.active-player {
+    display: none;
+    text-align: center;
+}
+
+.active-player figure {
+    display: inline-block;
+    margin: .4rem 0;
+    font-size: 2rem;
+    color: orange;
+}
+
+.active-player button {
+    display: block;
+    margin: 1rem auto;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.active-player button:hover {
+    background-color: red;
+}
+
 .board {
+    display: none;
     margin: 0 auto;
     width: 520px;
-    display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }

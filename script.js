@@ -1,13 +1,18 @@
 var player1 = document.getElementById("input-player1-name"),
     player2 = document.getElementById("input-player2-name"),
     markerSelect = document.getElementById("player-mark"),
-    player1Marker = '<span class="O-marker">O</span>',
-    player2Marker = '<span class="X-marker">X</span>',
-    turn = "1",
-    gameStatus = "playing",
+    player1Marker = '',
+    player2Marker = '',
+    turn = 0,
+    gameStatus = "setup",
     counter = 0,
     btnStart = document.getElementById("btn-start"),
-    setupAside = document.getElementById("setup"),
+    btnEnd = document.getElementById("btn-end"),
+    manageAside = document.getElementById("manage"),
+    pnlSetup = document.getElementById("setup"),
+    pnlActivePlayer = document.getElementById("display-active-player"),
+    displayActivePlayer = document.getElementById("active-player"),
+    gameBoardDisplay = document.getElementById("game-board"),
     gameBoard = Array.from(document.querySelectorAll("#game-board>div")),
     tileValues = gameBoard.map(function(item) {return item.innerHTML;}),
     tile = document.getElementById("game-board").addEventListener("click", setTile),
@@ -20,36 +25,64 @@ var player1 = document.getElementById("input-player1-name"),
     tile7 = document.getElementById("sq7"),
     tile8 = document.getElementById("sq8"),
     tile9 = document.getElementById("sq9");
-    // console.log(tileValues);
+    console.log(player1);
+    console.log(player2);
+    console.log(tileValues);
 
 
 function startGame(player1Name, player2Name, marker){
     if(player1Name == ""){
         alert("Player One, enter your name to begin!");
-    } else {
-        player1 = player1Name;
     }
     if(player2Name == ""){
         alert("Player Two, enter your name to begin!");
-    } else {
-        player2 = player2Name;
     }
     if(marker == "select"){
         alert("Player One, choose X's or O's to begin!");
-    } else if(marker == "O"){
-        player1Marker = '<span class="O-marker">O</span>';
-        player2Marker = '<span class="X-marker">X</span>';
-    } else {
-        player1Marker = '<span class="X-marker">X</span>';
-        player2Marker = '<span class="O-marker">O</span>';
     }
-    console.log(player1 + " will be " + player1Marker + ". " + player2 + " will be " + player2Marker + ".");
+    // console.log(player1 + " will be " + player1Marker + ". " + player2 + " will be " + player2Marker + ".");
+    if(player1Name != "" && player2Name != "" && marker != "select"){
+        player1 = player1Name;
+        player2 = player2Name;
+        if(marker == "O"){
+            player1Marker = '<span class="O-marker">O</span>';
+            player2Marker = '<span class="X-marker">X</span>';
+        } else {
+            player1Marker = '<span class="X-marker">X</span>';
+            player2Marker = '<span class="O-marker">O</span>';
+        }
+        pnlSetup.style.display = "none";
+        displayActivePlayer.innerText = player1Name + ", It's Your Turn!";
+        gameBoardDisplay.style.display = "flex";
+        pnlActivePlayer.style.display = "block";
+        gameStatus = "playing";
+        turn = 1;
+    }
+}
+
+function resetGame(type){
+    document.getElementById("input-player1-name").value = "";
+    document.getElementById("input-player2-name").value = "";
+    pnlSetup.style.display = "flex";
+    pnlActivePlayer.style.display = "none";
+    gameBoardDisplay.style.display = "none";
+    btnEnd.textContent = "Play Again";
+    markerSelect.value = "select";
+    player1 = document.getElementById("input-player1-name");
+    player2 = document.getElementById("input-player2-name");
+    player1Marker = '';
+    player2Marker = '';
+    console.log(player1);
+    console.log(player2);
+    console.log(tileValues);
 }
 
 btnStart.addEventListener("click", function(){
     startGame(player1.value, player2.value, markerSelect.value);
-    gameStatus = "playing";
-    turn = 1;
+});
+
+btnEnd.addEventListener("click", function(){
+    resetGame();
 });
 
 function setTile(event){
@@ -60,6 +93,7 @@ function setTile(event){
                 tile.innerHTML = player1Marker;
                 tileValues = gameBoard.map(function(item) {return item.innerHTML;});
                 counter++;
+                displayActivePlayer.innerText = player2 + ", It's Your Turn!";
                 isWinner(tileValues, player1Marker);
                 turn = 2;
                 console.log(counter);
@@ -67,6 +101,7 @@ function setTile(event){
                 tile.innerHTML = player2Marker;
                 tileValues = gameBoard.map(function(item) {return item.innerHTML;});
                 counter++;
+                displayActivePlayer.innerText = player1 + ", It's Your Turn!";
                 isWinner(tileValues, player2Marker);
                 turn = 1;
                 console.log(counter);
@@ -88,13 +123,16 @@ function isWinner(array, player){
         array[2] == player && array[4] == player && array[6] == player
         ){
             if(player == player1Marker){
-                gameStatus = "";
-                alert("Player 1 Wins!");
+                displayActivePlayer.innerText = player1 + " WINS!";
+                btnEnd.textContent = "Play Again";
+                gameStatus = "over";
             } else {
-                gameStatus = "";
-                alert("Player 2 Wins!");
+                displayActivePlayer.innerText = player2 + " WINS!";
+                btnEnd.textContent = "Play Again";
+                gameStatus = "over";
             }
         } else if (counter == 9) {
-            alert("The Game is a Tie!");
+            displayActivePlayer.innerText =  "The Game has ended in a TIE!";
+            btnEnd.textContent = "Play Again";
         }
 }
