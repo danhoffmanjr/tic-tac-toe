@@ -10,6 +10,7 @@ h1 {
     padding: 0;
     text-align: center;
     font-size: 3rem;
+    color: rgb(9, 253, 172);
 }
 
 aside {
@@ -81,6 +82,14 @@ aside {
 
 .active-player button:hover {
     background-color: red;
+}
+
+.active-player button.play-again {
+    display: block;
+}
+
+.active-player button.play-again:hover {
+    background-color: green;
 }
 
 .board {

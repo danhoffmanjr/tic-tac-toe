@@ -8,6 +8,7 @@ var player1 = document.getElementById("input-player1-name"),
     counter = 0,
     btnStart = document.getElementById("btn-start"),
     btnEnd = document.getElementById("btn-end"),
+    btnPlayAgain = document.getElementById("btn-play-again"),
     manageAside = document.getElementById("manage"),
     pnlSetup = document.getElementById("setup"),
     pnlActivePlayer = document.getElementById("display-active-player"),
@@ -66,12 +67,16 @@ function resetGame(type){
     pnlSetup.style.display = "flex";
     pnlActivePlayer.style.display = "none";
     gameBoardDisplay.style.display = "none";
-    btnEnd.textContent = "Play Again";
+    btnPlayAgain.style.display = "none";
     markerSelect.value = "select";
     player1 = document.getElementById("input-player1-name");
     player2 = document.getElementById("input-player2-name");
     player1Marker = '';
     player2Marker = '';
+    clearBoard();
+    turn = 0,
+    gameStatus = "setup",
+    counter = 0,
     console.log(player1);
     console.log(player2);
     console.log(tileValues);
@@ -84,6 +89,21 @@ btnStart.addEventListener("click", function(){
 btnEnd.addEventListener("click", function(){
     resetGame();
 });
+
+btnPlayAgain.addEventListener("click", function(){
+    clearBoard();
+    gameStatus = "playing";
+    counter = 0;
+    turn = 1;
+    btnPlayAgain.style.display = "none";
+    displayActivePlayer.innerText = player1 + ", It's Your Turn!";
+});
+
+function clearBoard(){
+    for(var i=0; i<gameBoard.length; i++){
+        gameBoard[i].innerHTML = '';
+    }
+}
 
 function setTile(event){
     var tile = document.getElementById(event.target.id);
@@ -124,15 +144,16 @@ function isWinner(array, player){
         ){
             if(player == player1Marker){
                 displayActivePlayer.innerText = player1 + " WINS!";
-                btnEnd.textContent = "Play Again";
+                btnPlayAgain.style.display = "block";
                 gameStatus = "over";
             } else {
                 displayActivePlayer.innerText = player2 + " WINS!";
-                btnEnd.textContent = "Play Again";
+                btnPlayAgain.style.display = "block";
                 gameStatus = "over";
             }
         } else if (counter == 9) {
             displayActivePlayer.innerText =  "The Game has ended in a TIE!";
-            btnEnd.textContent = "Play Again";
+            btnPlayAgain.style.display = "block";
+            gameStatus = "over";
         }
 }
